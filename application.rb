@@ -7,7 +7,6 @@ end
 
 get '/*' do
   erb :promo
-  `echo 'test' > /home/deploy/test`
 end
 
 post '/deploy' do
