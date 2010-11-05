@@ -3,13 +3,12 @@ require 'rubygems'
 require 'sinatra'
 
 def remote(cmd)
-  `ssh deploy@#{@payload.repository.homepage} cmd`
+  `ssh deploy@#{@payload.repository.homepage} #{cmd}`
 end
 
 post '/deploy' do
   @payload = JSON.parse(params[:payload])
-  `echo 'test' > ~/test`
-  `echo '#{@payload.to_json}' > ~/payload.js`
+  remote "touch ~/test"
   erb :promo
 end
 
