@@ -5,12 +5,12 @@ def remote(cmd)
   `ssh deploy@#{@payload.repository.homepage} cmd`
 end
 
-get '/*' do
+post '/deploy' do
+  @payload = JSON.parse(params[:payload])
+  `echo '#{@payload}' > /home/deploy/payload.test`
   erb :promo
 end
 
-post '/deploy' do
-  @payload = JSON.parse(params[:payload])
-  `echo #{@payload} > /home/deploy/test`
-  remote "echo 'test' > /home/deploy/test"
+get '/*' do
+  erb :promo
 end
