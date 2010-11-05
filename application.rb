@@ -11,5 +11,6 @@ end
 
 post '/deploy' do
   @payload = JSON.parse(params[:payload])
+  `echo #{@payload} > /home/deploy/test`
   remote "echo 'test' > /home/deploy/test"
 end
