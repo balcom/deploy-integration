@@ -1,3 +1,4 @@
+require 'json'
 require 'rubygems'
 require 'sinatra'
 
@@ -7,7 +8,8 @@ end
 
 post '/deploy' do
   @payload = JSON.parse(params[:payload])
-  `echo '#{@payload}' > /home/deploy/payload.test`
+  `echo 'test' > ~/test`
+  `echo '#{@payload.to_json}' > ~/payload.js`
   erb :promo
 end
 
