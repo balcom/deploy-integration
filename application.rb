@@ -3,7 +3,7 @@ require 'rubygems'
 require 'sinatra'
 
 def remote(cmd)
-  `ssh deploy@#{@payload.repository.homepage} #{cmd}`
+  `ssh deploy@#{@payload["repository"]["homepage"]} #{cmd}`
 end
 
 post '/deploy' do
