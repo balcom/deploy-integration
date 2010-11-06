@@ -13,6 +13,6 @@
   </head>
   <body>
     <img src="/images/promo.png">
-    <pre><%= @payload.to_json %></pre>
+    <pre><%= @payload.to_json unless @payload.to_json == "null" %></pre>
   </body>
 </html>

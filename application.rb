@@ -2,14 +2,23 @@ require 'json'
 require 'rubygems'
 require 'sinatra'
 
+def get_payload
+  @payload = JSON.parse(params[:payload])
+end
+
 def remote(cmd)
   `ssh deploy@#{@payload["repository"]["homepage"]} #{cmd}`
 end
 
 post '/deploy' do
-  @payload = JSON.parse(params[:payload])
-  remote "touch ~/test"
-  erb :promo
+  get_payload
+  remote "/home/deploy/bin/deploy_#{ case @payload["ref"]
+    when "refs/heads/master" then "staging"
+    when "refs/heads/production" then "production"
+    end
+  }.sh"
+    remote "/home/deploy/bin/deploy_production.sh"
+    erb :promo
 end
 
 get '/*' do
