@@ -7,7 +7,7 @@ def get_payload
 end
 
 def remote(cmd)
-  `ssh deploy@#{@payload["repository"]["homepage"]} #{cmd}`
+  `ssh deploy@#{@payload["repository"]["homepage"]} #{cmd} &`
 end
 
 post '/deploy' do
