@@ -14,6 +14,7 @@ post '/deploy' do
   get_payload
   remote "/home/deploy/bin/deploy_#{ case @payload["ref"]
     when "refs/heads/master" then "staging"
+    when "refs/heads/production" then "production"
     end
   }.sh"
     erb :promo
