@@ -7,17 +7,13 @@ def get_payload
 end
 
 def remote(cmd)
-  `ssh deploy@#{@payload["repository"]["homepage"]} #{cmd}`
+  `ssh deploy@184.106.150.22 #{cmd}`
 end
 
 post '/deploy' do
   get_payload
-  remote "/home/deploy/bin/deploy_#{ case @payload["ref"]
-    when "refs/heads/master" then "staging"
-    when "refs/heads/production" then "production"
-    end
-  }.sh"
-    erb :promo
+  remote `cd /srv/#{@payload["repository"]["name"]} && git pull`
+  erb :promo
 end
 
 get '/*' do
