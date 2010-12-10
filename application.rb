@@ -12,7 +12,7 @@ end
 
 post '/deploy' do
   get_payload
-  remote `cd /srv/#{@payload["repository"]["name"]} && git pull`
+  remote "cd /srv/#{@payload["repository"]["name"]} && git pull"
   erb :promo
 end
 
